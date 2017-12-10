@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tangbank.core import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
+    path('teste/', views.teste, name='teste'),
     path('admin/', admin.site.urls),
 ]
