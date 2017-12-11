@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Account
 
 def home(request):
-    return render(request, 'home.html', {'user': 'Guilmour'})
+    accounts = Account.objects.all()
+    context = {'accounts': accounts}
+    return render(request, 'home.html', context)
 def teste(request):
     return HttpResponse("teste msm")

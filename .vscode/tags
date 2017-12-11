@@ -4,8 +4,14 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+0001_initial.py	../tangbank/tangbank/core/migrations/0001_initial.py	1;"	kind:file	line:1
+0002_transaction_made_at.py	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	1;"	kind:file	line:1
+0003_auto_20171210_2013.py	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	1;"	kind:file	line:1
 ALLOWED_HOSTS	../tangbank/tangbank/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
 AUTH_PASSWORD_VALIDATORS	../tangbank/tangbank/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:88
+Account	../tangbank/tangbank/core/models.py	/^class Account(models.Model):$/;"	kind:class	line:7
+AccountAdmin	../tangbank/tangbank/core/admin.py	/^class AccountAdmin(admin.ModelAdmin):$/;"	kind:class	line:5
+AccountManager	../tangbank/tangbank/core/models.py	/^class AccountManager(models.Manager):$/;"	kind:class	line:3
 BASE_DIR	../tangbank/tangbank/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
 CoreConfig	../tangbank/tangbank/core/apps.py	/^class CoreConfig(AppConfig):$/;"	kind:class	line:4
 DATABASES	../tangbank/tangbank/settings.py	/^DATABASES = {$/;"	kind:variable	line:77
@@ -13,11 +19,16 @@ DEBUG	../tangbank/tangbank/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
 INSTALLED_APPS	../tangbank/tangbank/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
 LANGUAGE_CODE	../tangbank/tangbank/settings.py	/^LANGUAGE_CODE = 'pt-br'$/;"	kind:variable	line:107
 MIDDLEWARE	../tangbank/tangbank/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:43
+Meta	../tangbank/tangbank/core/models.py	/^    class Meta:$/;"	kind:class	line:15
+Migration	../tangbank/tangbank/core/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
 ROOT_URLCONF	../tangbank/tangbank/settings.py	/^ROOT_URLCONF = 'tangbank.urls'$/;"	kind:variable	line:53
 SECRET_KEY	../tangbank/tangbank/settings.py	/^SECRET_KEY = '!&l#$wxtnhza&_7cyibc(u=ptsr1*_wfzx+rs#3-cs$#ojw(k6'$/;"	kind:variable	line:23
 STATIC_URL	../tangbank/tangbank/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:121
 TEMPLATES	../tangbank/tangbank/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:55
 TIME_ZONE	../tangbank/tangbank/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:109
+Transaction	../tangbank/tangbank/core/models.py	/^class Transaction(models.Model):$/;"	kind:class	line:19
 USE_I18N	../tangbank/tangbank/settings.py	/^USE_I18N = True$/;"	kind:variable	line:111
 USE_L10N	../tangbank/tangbank/settings.py	/^USE_L10N = True$/;"	kind:variable	line:113
 USE_TZ	../tangbank/tangbank/settings.py	/^USE_TZ = True$/;"	kind:variable	line:115
@@ -25,17 +36,48 @@ WSGI_APPLICATION	../tangbank/tangbank/settings.py	/^WSGI_APPLICATION = 'tangbank
 __init__.py	../tangbank/tangbank/__init__.py	1;"	kind:file	line:1
 __init__.py	../tangbank/tangbank/core/__init__.py	1;"	kind:file	line:1
 __init__.py	../tangbank/tangbank/core/migrations/__init__.py	1;"	kind:file	line:1
+__str__	../tangbank/tangbank/core/models.py	/^    def __str__(self):$/;"	kind:member	line:12
+account_id	../tangbank/tangbank/core/models.py	/^    account_id = models.IntegerField('ID da Conta')$/;"	kind:variable	line:20
+action	../tangbank/tangbank/core/models.py	/^    action = models.CharField('Ação', max_length=150)$/;"	kind:variable	line:21
 admin.py	../tangbank/tangbank/core/admin.py	1;"	kind:file	line:1
+affected_account_id	../tangbank/tangbank/core/models.py	/^    affected_account_id = models.IntegerField('ID da Conta Afetada')$/;"	kind:variable	line:22
 application	../tangbank/tangbank/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
 apps.py	../tangbank/tangbank/core/apps.py	1;"	kind:file	line:1
+balance	../tangbank/tangbank/core/models.py	/^    balance = models.DecimalField('Saldo', max_digits=19, decimal_places=2)$/;"	kind:variable	line:9
+dependencies	../tangbank/tangbank/core/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^    dependencies = [$/;"	kind:variable	line:8
 django-admin.py	../bin/django-admin.py	1;"	kind:file	line:1
-home	../tangbank/tangbank/core/views.py	/^def home(request):$/;"	kind:function	line:4
+field	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^            field=models.DateTimeField(auto_now=True, verbose_name='Feito em...'),$/;"	kind:variable	line:16
+field	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^            field=models.DateTimeField(auto_now_add=True, verbose_name='Feito em...'),$/;"	kind:variable	line:16
+fields	../tangbank/tangbank/core/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:16
+fields	../tangbank/tangbank/core/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:24
+home	../tangbank/tangbank/core/views.py	/^def home(request):$/;"	kind:function	line:5
+initial	../tangbank/tangbank/core/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:8
+list_display	../tangbank/tangbank/core/admin.py	/^    list_display = ['name', 'balance']$/;"	kind:variable	line:6
+made_at	../tangbank/tangbank/core/models.py	/^    made_at = models.DateTimeField('Feito em...', auto_now_add=True)/;"	kind:variable	line:23
 manage.py	../tangbank/manage.py	1;"	kind:file	line:1
+model_name	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^            model_name='transaction',$/;"	kind:variable	line:14
+model_name	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^            model_name='transaction',$/;"	kind:variable	line:14
 models.py	../tangbank/tangbank/core/models.py	1;"	kind:file	line:1
 name	../tangbank/tangbank/core/apps.py	/^    name = 'core'$/;"	kind:variable	line:5
+name	../tangbank/tangbank/core/migrations/0001_initial.py	/^            name='Account',$/;"	kind:variable	line:15
+name	../tangbank/tangbank/core/migrations/0001_initial.py	/^            name='Transaction',$/;"	kind:variable	line:23
+name	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^            name='made_at',$/;"	kind:variable	line:15
+name	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^            name='made_at',$/;"	kind:variable	line:15
+name	../tangbank/tangbank/core/models.py	/^    name = models.CharField('Nome', max_length=100)$/;"	kind:variable	line:8
+objects	../tangbank/tangbank/core/models.py	/^    objects = AccountManager()$/;"	kind:variable	line:10
+operations	../tangbank/tangbank/core/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:13
+operations	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^    operations = [$/;"	kind:variable	line:12
+search	../tangbank/tangbank/core/models.py	/^    def search(self, query):$/;"	kind:member	line:4
+search_fields	../tangbank/tangbank/core/admin.py	/^    search_fields = ['name']$/;"	kind:variable	line:7
 settings.py	../tangbank/tangbank/settings.py	1;"	kind:file	line:1
+teste	../tangbank/tangbank/core/views.py	/^def teste(request):$/;"	kind:function	line:9
 tests.py	../tangbank/tangbank/core/tests.py	1;"	kind:file	line:1
 urlpatterns	../tangbank/tangbank/urls.py	/^urlpatterns = [$/;"	kind:variable	line:20
 urls.py	../tangbank/tangbank/urls.py	1;"	kind:file	line:1
+verbose_name	../tangbank/tangbank/core/models.py	/^        verbose_name = 'Conta'$/;"	kind:variable	line:16
+verbose_name_plural	../tangbank/tangbank/core/models.py	/^        verbose_name_plural = 'Contas'$/;"	kind:variable	line:17
 views.py	../tangbank/tangbank/core/views.py	1;"	kind:file	line:1
 wsgi.py	../tangbank/tangbank/wsgi.py	1;"	kind:file	line:1
