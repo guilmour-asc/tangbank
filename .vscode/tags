@@ -8,6 +8,7 @@
 0002_transaction_made_at.py	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	1;"	kind:file	line:1
 0003_auto_20171210_2013.py	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	1;"	kind:file	line:1
 0004_auto_20171211_2242.py	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	1;"	kind:file	line:1
+0005_auto_20171212_1430.py	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	1;"	kind:file	line:1
 ALLOWED_HOSTS	../tangbank/tangbank/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
 AUTH_PASSWORD_VALIDATORS	../tangbank/tangbank/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:88
 Account	../tangbank/tangbank/core/models.py	/^class Account(models.Model):$/;"	kind:class	line:7
@@ -18,6 +19,10 @@ Cashier	../tangbank/tangbank/core/models.py	/^class Cashier(models.Model):$/;"	k
 CoreConfig	../tangbank/tangbank/core/apps.py	/^class CoreConfig(AppConfig):$/;"	kind:class	line:4
 DATABASES	../tangbank/tangbank/settings.py	/^DATABASES = {$/;"	kind:variable	line:77
 DEBUG	../tangbank/tangbank/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+FormAccount	../tangbank/tangbank/core/forms.py	/^class FormAccount(forms.Form):$/;"	kind:class	line:3
+FormCashier	../tangbank/tangbank/core/forms.py	/^class FormCashier(forms.Form):$/;"	kind:class	line:16
+FormTransaction	../tangbank/tangbank/core/forms.py	/^class FormTransaction(forms.Form):$/;"	kind:class	line:11
+FormWithdrawal	../tangbank/tangbank/core/forms.py	/^class FormWithdrawal(forms.Form):$/;"	kind:class	line:7
 INSTALLED_APPS	../tangbank/tangbank/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
 LANGUAGE_CODE	../tangbank/tangbank/settings.py	/^LANGUAGE_CODE = 'pt-br'$/;"	kind:variable	line:107
 MIDDLEWARE	../tangbank/tangbank/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:43
@@ -26,6 +31,7 @@ Migration	../tangbank/tangbank/core/migrations/0001_initial.py	/^class Migration
 Migration	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
 Migration	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
 Migration	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
 ROOT_URLCONF	../tangbank/tangbank/settings.py	/^ROOT_URLCONF = 'tangbank.urls'$/;"	kind:variable	line:53
 SECRET_KEY	../tangbank/tangbank/settings.py	/^SECRET_KEY = '!&l#$wxtnhza&_7cyibc(u=ptsr1*_wfzx+rs#3-cs$#ojw(k6'$/;"	kind:variable	line:23
 STATIC_URL	../tangbank/tangbank/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:121
@@ -40,30 +46,55 @@ __init__.py	../tangbank/tangbank/__init__.py	1;"	kind:file	line:1
 __init__.py	../tangbank/tangbank/core/__init__.py	1;"	kind:file	line:1
 __init__.py	../tangbank/tangbank/core/migrations/__init__.py	1;"	kind:file	line:1
 __str__	../tangbank/tangbank/core/models.py	/^    def __str__(self):$/;"	kind:member	line:12
+account_balance	../tangbank/tangbank/core/forms.py	/^    account_balance = forms.DecimalField(label='Saldo', max_digits=19, decimal_places=2)$/;"	kind:variable	line:5
 account_id	../tangbank/tangbank/core/models.py	/^    account_id = models.IntegerField('ID da Conta')$/;"	kind:variable	line:20
+account_name	../tangbank/tangbank/core/forms.py	/^    account_name = forms.CharField(label='Nome', max_length=100)$/;"	kind:variable	line:4
 action	../tangbank/tangbank/core/models.py	/^    action = models.CharField('Ação', max_length=150)$/;"	kind:variable	line:21
 admin.py	../tangbank/tangbank/core/admin.py	1;"	kind:file	line:1
 affected_account_id	../tangbank/tangbank/core/models.py	/^    affected_account_id = models.IntegerField('ID da Conta Afetada')$/;"	kind:variable	line:22
 application	../tangbank/tangbank/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
 apps.py	../tangbank/tangbank/core/apps.py	1;"	kind:file	line:1
 balance	../tangbank/tangbank/core/models.py	/^    balance = models.DecimalField('Saldo', max_digits=19, decimal_places=2)$/;"	kind:variable	line:9
+cashier_note1	../tangbank/tangbank/core/forms.py	/^    cashier_note1 = forms.IntegerField(label='Cédulas de P$1')$/;"	kind:variable	line:17
+cashier_note10	../tangbank/tangbank/core/forms.py	/^    cashier_note10 = forms.IntegerField(label='Cédulas de P$10')$/;"	kind:variable	line:20
+cashier_note100	../tangbank/tangbank/core/forms.py	/^    cashier_note100 = forms.IntegerField(label='Cédulas de P$100')/;"	kind:variable	line:23
+cashier_note2	../tangbank/tangbank/core/forms.py	/^    cashier_note2 = forms.IntegerField(label='Cédulas de P$2')$/;"	kind:variable	line:18
+cashier_note20	../tangbank/tangbank/core/forms.py	/^    cashier_note20 = forms.IntegerField(label='Cédulas de P$20')$/;"	kind:variable	line:21
+cashier_note5	../tangbank/tangbank/core/forms.py	/^    cashier_note5 = forms.IntegerField(label='Cédulas de P$5')$/;"	kind:variable	line:19
+cashier_note50	../tangbank/tangbank/core/forms.py	/^    cashier_note50 = forms.IntegerField(label='Cédulas de P$50')$/;"	kind:variable	line:22
 dependencies	../tangbank/tangbank/core/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:10
 dependencies	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^    dependencies = [$/;"	kind:variable	line:8
 dependencies	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^    dependencies = [$/;"	kind:variable	line:8
 dependencies	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^    dependencies = [$/;"	kind:variable	line:8
 django-admin.py	../bin/django-admin.py	1;"	kind:file	line:1
 field	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^            field=models.DateTimeField(auto_now=True, verbose_name='Feito em...'),$/;"	kind:variable	line:16
 field	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^            field=models.DateTimeField(auto_now_add=True, verbose_name='Feito em...'),$/;"	kind:variable	line:16
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$1'),$/;"	kind:variable	line:16
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$10'),$/;"	kind:variable	line:21
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$100'),$/;"	kind:variable	line:26
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$2'),$/;"	kind:variable	line:31
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$20'),$/;"	kind:variable	line:36
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$5'),$/;"	kind:variable	line:41
+field	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            field=models.IntegerField(default=10, verbose_name='Qtd. de Cédulas de P$50'),$/;"	kind:variable	line:46
 fields	../tangbank/tangbank/core/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:16
 fields	../tangbank/tangbank/core/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:24
 fields	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^            fields=[$/;"	kind:variable	line:15
-home	../tangbank/tangbank/core/views.py	/^def home(request):$/;"	kind:function	line:5
+forms.py	../tangbank/tangbank/core/forms.py	1;"	kind:file	line:1
+home	../tangbank/tangbank/core/views.py	/^def home(request):$/;"	kind:function	line:8
 initial	../tangbank/tangbank/core/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:8
 list_display	../tangbank/tangbank/core/admin.py	/^    list_display = ['name', 'balance']$/;"	kind:variable	line:6
 made_at	../tangbank/tangbank/core/models.py	/^    made_at = models.DateTimeField('Feito em...', auto_now_add=True)$/;"	kind:variable	line:23
 manage.py	../tangbank/manage.py	1;"	kind:file	line:1
 model_name	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^            model_name='transaction',$/;"	kind:variable	line:14
 model_name	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^            model_name='transaction',$/;"	kind:variable	line:14
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:14
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:19
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:24
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:29
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:34
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:39
+model_name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            model_name='cashier',$/;"	kind:variable	line:44
 models.py	../tangbank/tangbank/core/models.py	1;"	kind:file	line:1
 name	../tangbank/tangbank/core/apps.py	/^    name = 'core'$/;"	kind:variable	line:5
 name	../tangbank/tangbank/core/migrations/0001_initial.py	/^            name='Account',$/;"	kind:variable	line:15
@@ -72,28 +103,41 @@ name	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^        
 name	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^            name='made_at',$/;"	kind:variable	line:15
 name	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^            name='Cashier',$/;"	kind:variable	line:14
 name	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^            name='account',$/;"	kind:variable	line:27
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note1',$/;"	kind:variable	line:15
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note10',$/;"	kind:variable	line:20
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note100',$/;"	kind:variable	line:25
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note2',$/;"	kind:variable	line:30
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note20',$/;"	kind:variable	line:35
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note5',$/;"	kind:variable	line:40
+name	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^            name='note50',$/;"	kind:variable	line:45
 name	../tangbank/tangbank/core/models.py	/^    name = models.CharField('Nome', max_length=100)$/;"	kind:variable	line:8
-note1	../tangbank/tangbank/core/models.py	/^    note1 = models.IntegerField('Qtd. de Cédulas de P$1')$/;"	kind:variable	line:26
-note10	../tangbank/tangbank/core/models.py	/^    note10 = models.IntegerField('Qtd. de Cédulas de P$10')$/;"	kind:variable	line:29
-note100	../tangbank/tangbank/core/models.py	/^    note100 = models.IntegerField('Qtd. de Cédulas de P$100')/;"	kind:variable	line:32
-note2	../tangbank/tangbank/core/models.py	/^    note2 = models.IntegerField('Qtd. de Cédulas de P$2')$/;"	kind:variable	line:27
-note20	../tangbank/tangbank/core/models.py	/^    note20 = models.IntegerField('Qtd. de Cédulas de P$20')$/;"	kind:variable	line:30
-note5	../tangbank/tangbank/core/models.py	/^    note5 = models.IntegerField('Qtd. de Cédulas de P$5')$/;"	kind:variable	line:28
-note50	../tangbank/tangbank/core/models.py	/^    note50 = models.IntegerField('Qtd. de Cédulas de P$50')$/;"	kind:variable	line:31
+note1	../tangbank/tangbank/core/models.py	/^    note1 = models.IntegerField('Qtd. de Cédulas de P$1', default=10)$/;"	kind:variable	line:26
+note10	../tangbank/tangbank/core/models.py	/^    note10 = models.IntegerField('Qtd. de Cédulas de P$10', default=10)$/;"	kind:variable	line:29
+note100	../tangbank/tangbank/core/models.py	/^    note100 = models.IntegerField('Qtd. de Cédulas de P$100', default=10)/;"	kind:variable	line:32
+note2	../tangbank/tangbank/core/models.py	/^    note2 = models.IntegerField('Qtd. de Cédulas de P$2', default=10)$/;"	kind:variable	line:27
+note20	../tangbank/tangbank/core/models.py	/^    note20 = models.IntegerField('Qtd. de Cédulas de P$20', default=10)$/;"	kind:variable	line:30
+note5	../tangbank/tangbank/core/models.py	/^    note5 = models.IntegerField('Qtd. de Cédulas de P$5', default=10)$/;"	kind:variable	line:28
+note50	../tangbank/tangbank/core/models.py	/^    note50 = models.IntegerField('Qtd. de Cédulas de P$50', default=10)$/;"	kind:variable	line:31
 objects	../tangbank/tangbank/core/models.py	/^    objects = AccountManager()$/;"	kind:variable	line:10
 operations	../tangbank/tangbank/core/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:13
 operations	../tangbank/tangbank/core/migrations/0002_transaction_made_at.py	/^    operations = [$/;"	kind:variable	line:12
 operations	../tangbank/tangbank/core/migrations/0003_auto_20171210_2013.py	/^    operations = [$/;"	kind:variable	line:12
 operations	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../tangbank/tangbank/core/migrations/0005_auto_20171212_1430.py	/^    operations = [$/;"	kind:variable	line:12
 options	../tangbank/tangbank/core/migrations/0004_auto_20171211_2242.py	/^            options={'verbose_name': 'Conta', 'verbose_name_plural': 'Contas'},$/;"	kind:variable	line:28
 search	../tangbank/tangbank/core/models.py	/^    def search(self, query):$/;"	kind:member	line:4
 search_fields	../tangbank/tangbank/core/admin.py	/^    search_fields = ['name']$/;"	kind:variable	line:7
 settings.py	../tangbank/tangbank/settings.py	1;"	kind:file	line:1
-teste	../tangbank/tangbank/core/views.py	/^def teste(request):$/;"	kind:function	line:10
+teste	../tangbank/tangbank/core/views.py	/^def teste(request):$/;"	kind:function	line:21
 tests.py	../tangbank/tangbank/core/tests.py	1;"	kind:file	line:1
+transaction_benefited_name	../tangbank/tangbank/core/forms.py	/^    transaction_benefited_name = forms.CharField(label='Nome do Beneficiado', max_length=100)$/;"	kind:variable	line:14
+transaction_transferring_name	../tangbank/tangbank/core/forms.py	/^    transaction_transferring_name = forms.CharField(label='Nome do Transferinte', max_length=100)$/;"	kind:variable	line:12
+transaction_value	../tangbank/tangbank/core/forms.py	/^    transaction_value = forms.DecimalField(label='Valor do saque', max_digits=19, decimal_places=2)$/;"	kind:variable	line:13
 urlpatterns	../tangbank/tangbank/urls.py	/^urlpatterns = [$/;"	kind:variable	line:20
 urls.py	../tangbank/tangbank/urls.py	1;"	kind:file	line:1
 verbose_name	../tangbank/tangbank/core/models.py	/^        verbose_name = 'Conta'$/;"	kind:variable	line:16
 verbose_name_plural	../tangbank/tangbank/core/models.py	/^        verbose_name_plural = 'Contas'$/;"	kind:variable	line:17
 views.py	../tangbank/tangbank/core/views.py	1;"	kind:file	line:1
+withdrawal_name	../tangbank/tangbank/core/forms.py	/^    withdrawal_name = forms.CharField(label='Nome', max_length=100)$/;"	kind:variable	line:8
+withdrawal_value	../tangbank/tangbank/core/forms.py	/^    withdrawal_value = forms.DecimalField(label='Valor do saque', max_digits=19, decimal_places=2)$/;"	kind:variable	line:9
 wsgi.py	../tangbank/tangbank/wsgi.py	1;"	kind:file	line:1

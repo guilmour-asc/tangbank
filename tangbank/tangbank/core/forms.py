@@ -1,8 +1,12 @@
 from django import forms
+from .models import Account
 
 class FormAccount(forms.Form):
     account_name = forms.CharField(label='Nome', max_length=100)
     account_balance = forms.DecimalField(label='Saldo', max_digits=19, decimal_places=2)
+    def post(self, data):
+        account = Account(name=data['account_name'], balance=data['account_balance'])
+        account.save()
 
 class FormWithdrawal(forms.Form):
     withdrawal_name = forms.CharField(label='Nome', max_length=100)

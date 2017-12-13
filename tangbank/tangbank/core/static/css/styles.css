@@ -1,75 +1,72 @@
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+html,body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-body {
-    margin: 0 auto;
-    line-height: 1.7em;
+
+.banco-card {
+    margin: 10px;
+    width: 280px;
 }
-.l-box {
-    padding: 1em;
+
+.banco-card td {
+    padding: 5px;
 }
-.header {
-    margin: 0 0;
+
+.banco-card th {
+    padding: 5px;
 }
-.header .pure-menu {
-    padding: 0.5em;
+
+.banco-card-wide1 {
+    width: 380px;
 }
-.header .pure-menu li a:hover,
-.header .pure-menu li a:focus {
-    background: none;
-    border: none;
-    color: #aaa;
+
+form {
+    padding: 20px;
 }
-body .primary-button {
-    background: #02a6eb;
-    color: #fff;
-}
-.splash {
-    margin: 2em auto 0;
-    padding: 3em 0.5em;
-    background: #eee;
-}
-.splash .splash-head {
-    font-size: 300%;
-    margin: 0em 0;
-    line-height: 1.2em;
-}
-.splash .splash-subhead {
-    color: #999;
-    font-weight: 300;
-    line-height: 1.4em;
-}
-.splash .primary-button {
-    font-size: 150%;
-}
-.content .content-subhead {
-    color: #999;
-    padding-bottom: 0.3em;
-    text-transform: uppercase;
-    margin: 0;
-    border-bottom: 2px solid #eee;
+
+.left-side {
+    margin-right: 100px;
     display: inline-block;
 }
-.content .content-ribbon {
-    margin: 3em;
-    border-bottom: 1px solid #eee;
+
+.left-side div {
+    display: block;
 }
-.ribbon {
-    background: #eee;
-    text-align: center;
-    padding: 2em;
-    color: #999;
+
+.left-side fieldset {
+    margin: 20px 0;
 }
-.ribbon h2 {
-    display: inline;
-    font-weight: normal;
+
+.left-side fieldset>label {
+    padding-right: 20px;
 }
-.footer {
-    background: #111;
-    color: #666;
-    text-align: center;
-    padding: 1em;
-    font-size: 80%;
+
+.right-side {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.toolbar-section {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.info-section {
+    margin: 15px 0;
+}
+
+.info-section>* {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.info-section table {
+    margin-right: 200px;
+}
+
+.info-section ul li {
+    padding: 0;
+}
+
+.mdl-grid.center-items {
+    justify-content: center;
 }
