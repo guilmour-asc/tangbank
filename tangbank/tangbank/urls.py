@@ -14,11 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from tangbank.core import views
+from django.urls import include, path
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('teste/', views.teste, name='teste'),
+    path('', include('tangbank.core.urls', namespace='core')),
     path('admin/', admin.site.urls),
 ]

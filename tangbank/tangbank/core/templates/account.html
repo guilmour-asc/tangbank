@@ -1,0 +1,93 @@
+{% extends "base.html" %} {% block content %}
+<main class="mdl-layout__content">
+    <div class="page-content">
+
+        <div class="mdl-grid center-items">
+            <div class="banco-card-wide2 banco-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">{{account.name}}</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Conta</th>
+                                <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                                <th class="mdl-data-table__cell--non-numeric">Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabcontas">
+                            <tr>
+                                <td>{{account.id}}</td>
+                                <td>{{account.name}}</td>
+                                <td>P${{account.balance}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'core:conta' pk=account.id %}">
+                        Modificar
+                    </a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'core:conta' pk=account.id %}">
+                        Sacar
+                    </a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'core:conta' pk=account.id %}">
+                        Transferir
+                    </a>
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'core:conta' pk=account.id %}">
+                        Extrato
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {% if showDict.change %}
+        <div class="mdl-grid center-items">
+            <div class="banco-card-wide2 mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">Alterar Conta</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="mudaid">
+                        <label class="mdl-textfield__label" for="mudaid">ID da conta</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="mudanome">
+                        <label class="mdl-textfield__label" for="mudanome">Novo nome da conta</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="number" step="any" min=0 id="mudasaldo">
+                        <label class="mdl-textfield__label" for="mudasaldo">Novo saldo da conta</label>
+                    </div>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:mudarConta();">
+                        Mudar conta
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if showDict.withdraw %}
+        <div class="mdl-grid center-items">
+            b
+        </div>
+        {% endif %}
+
+        {% if showDict.transfer %}
+        <div class="mdl-grid center-items">
+            c
+        </div>
+        {% endif %}
+        
+        {% if showDict.extract %}
+        <div class="mdl-grid center-items">
+            d
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

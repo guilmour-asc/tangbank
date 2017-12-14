@@ -1,492 +1,194 @@
-<!DOCTYPE html>
-<html>
-    {% load static %}
-
-<head>
-    <meta charset="utf-8">
-    <title>Banco de Tangamandápio</title>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.lime-pink.min.css" />
-    <link rel="stylesheet" href="https://rawgit.com/MEYVN-digital/mdl-selectfield/master/mdl-selectfield.min.css">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script defer src="https://rawgit.com/MEYVN-digital/mdl-selectfield/master/mdl-selectfield.min.js"></script>
-</head>
-
-<body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">Banco de Tangamandápio</span>
-            </div>
-        </header>
-
-        <main class="mdl-layout__content">
-            <div class="page-content">
-
-                <div class="mdl-textfield mdl-js-textfield" style="margin: 10px; width: 80%">
-                    <input class="mdl-textfield__input" type="text" id="requrl" value="http://localhost:8000/">
-                    <label class="mdl-textfield__label" for="requrl">Insira aqui a URL de requisição (Ex.: http://localhost:8000/)</label>
+{% extends "base.html" %} {% block content %}
+<main class="mdl-layout__content">
+    <div class="page-content">
+        <div class="mdl-grid center-items">
+            <div class="banco-card banco-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">Contas</h2>
                 </div>
+                <div class="mdl-card__supporting-text">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Conta</th>
+                                <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                                <!-- <th class="mdl-data-table__cell--non-numeric">Saldo</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="tabcontas">
+                            {% for account in accounts %}
+                            <tr>
+                                <td>{{account.id}}</td>
+                                <td>
+                                    <a href="{% url 'core:conta' pk=account.id %}">{{account.name}}</a>
+                                </td>
+                                <!-- <td>P${{account.balance}}</td> -->
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="{javascript:atualizaContas();}">
+                        Adicionar Conta
+                    </a>
+                </div>
+            </div>
 
-                <div class="mdl-grid center-items">
-                    <div class="banco-card-wide1 banco-card mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title mdl-card--expand">
-                            <h2 class="mdl-card__title-text">Lista de Contas</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="mdl-data-table__cell--non-numeric">Conta</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Nome</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Saldo</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabcontas">
-                                    {% for account in accounts %}
-                                    <tr>
-                                        <td>{{account.id}}</td>
-                                        <td>{{account.name}}</td>
-                                        <td>P${{account.balance}}</td>
-                                    </tr>
-                                    {% empty %}
-                                    <tr>
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>-</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="{javascript:atualizaContas();}">
-                                Atualizar lista
-                            </a>
-                        </div>
-                    </div>
+            <div class="banco-card-wide1 banco-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">Estoque do Caixa</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>P$ 1</th>
+                                <th>P$ 2</th>
+                                <th>P$ 5</th>
+                                <th>P$ 10</th>
+                                <th>P$ 20</th>
+                                <th>P$ 50</th>
+                                <th>P$ 100</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="ced1">{{cashier.note1}}</td>
+                                <td id="ced2">{{cashier.note2}}</td>
+                                <td id="ced5">{{cashier.note5}}</td>
+                                <td id="ced10">{{cashier.note10}}</td>
+                                <td id="ced20">{{cashier.note20}}</td>
+                                <td id="ced50">{{cashier.note50}}</td>
+                                <td id="ced100">{{cashier.note100}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'core:caixa' %}">
+                        Atualizar tabela
+                    </a>
+                </div>
+            </div>
 
-                    <div class="banco-card-wide1 banco-card mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title mdl-card--expand">
-                            <h2 class="mdl-card__title-text">Cédulas no Caixa Eletrônico</h2>
+            <!-- !!! NÃO DELETAR !!! -->
+            <!-- <div class="banco-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">Alterar Estoque</h2>
+                </div>
+                <form method="post">
+                    <fieldset>
+                        {% for cas_field in form_cashier %}
+                        <div class="mdl-textfield mdl-js-textfield">
+                            {{cas_field.label_tag}} {{cas_field}} {{cas_field.errors}}
                         </div>
-                        <div class="mdl-card__supporting-text">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>P$ 1</th>
-                                        <th>P$ 2</th>
-                                        <th>P$ 5</th>
-                                        <th>P$ 10</th>
-                                        <th>P$ 20</th>
-                                        <th>P$ 50</th>
-                                        <th>P$ 100</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td id="ced1">{{cashier.note1}}</td>
-                                        <td id="ced2">{{cashier.note2}}</td>
-                                        <td id="ced5">{{cashier.note5}}</td>
-                                        <td id="ced10">{{cashier.note10}}</td>
-                                        <td id="ced20">{{cashier.note20}}</td>
-                                        <td id="ced50">{{cashier.note50}}</td>
-                                        <td id="ced100">{{cashier.note100}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        {% endfor %}
                         <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:atualizaEstoque();">
-                                Atualizar tabela
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- <div class="banco-card mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title mdl-card--expand">
-                            <h2 class="mdl-card__title-text">Mudar cédulas</h2>
-                        </div>
-                        <div class="mdl-card__supporting-text">
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa1">
-                                <label class="mdl-textfield__label" for="caixa1">Cédulas de 1</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa2">
-                                <label class="mdl-textfield__label" for="caixa2">Cédulas de 2</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa5">
-                                <label class="mdl-textfield__label" for="caixa5">Cédulas de 5</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa10">
-                                <label class="mdl-textfield__label" for="caixa10">Cédulas de 10</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa20">
-                                <label class="mdl-textfield__label" for="caixa20">Cédulas de 20</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa50">
-                                <label class="mdl-textfield__label" for="caixa50">Cédulas de 50</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="caixa100">
-                                <label class="mdl-textfield__label" for="caixa100">Cédulas de 100</label>
-                            </div>
-                        </div>
-                        <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:estoqueCaixa();">
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">
                                 Alterar estoque
-                            </a>
+                            </button>
                         </div>
-                    </div> -->
+                    </fieldset>
+                </form>
+            </div> -->
 
-                    <div class="banco-card mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title mdl-card--expand">
-                            <h2 class="mdl-card__title-text">Mudar Cédulas</h2>
-                        </div>
-                        <form method="post">
-                            <fieldset>
-                                {% for cas_field in form_cashier %}
-                                <div class="mdl-textfield mdl-js-textfield">
-                                    {{cas_field.label_tag}} {{cas_field}} {{cas_field.errors}}
-                                </div>
-                                {% endfor %}
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">
-                                        Alterar estoque
-                                    </button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-
-                    <div class="banco-card mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title mdl-card--expand">
-                            <h2 class="mdl-card__title-text">Nova Conta</h2>
-                        </div>
-                        {% if is_valid %}
-                        <br>
-                        <h6 style="padding: 15px">Contato criado!</h6>
-                        {% endif %}
-                        <form method="post">
-                            <fieldset>
-                                {% for acc_field in form_account %}
-                                <div class="mdl-textfield mdl-js-textfield">
-                                    {{acc_field.label_tag}} {{acc_field}} {{acc_field.errors}}
-                                </div>
-                                {% endfor %}
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">
-                                        Criar conta
-                                    </button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
+            <div class="banco-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">Nova Conta</h2>
                 </div>
+                {% if is_valid %}
+                <br>
+                <h6 style="padding: 15px">Contato criado!</h6>
+                {% endif %}
+                <form method="post">
+                    <fieldset>
+                        {% for acc_field in form_account %}
+                        <div class="mdl-textfield mdl-js-textfield">
+                            {{acc_field.label_tag}} {{acc_field}} {{acc_field.errors}}
+                        </div>
+                        {% endfor %}
+                        <div class="mdl-card__actions mdl-card--border">
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit">
+                                Criar conta
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
 
 
-                <div class="banco-card mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-card--expand">
-                        <h2 class="mdl-card__title-text">Saldo de Conta</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="saldoid">
-                            <label class="mdl-textfield__label" for="saldoid">ID da conta</label>
-                        </div>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:saldoConta();">
-                            Ver saldo
-                        </a>
-                    </div>
-                </div>
-
-                <div class="banco-card mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-card--expand">
-                        <h2 class="mdl-card__title-text">Mudar Conta</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="mudaid">
-                            <label class="mdl-textfield__label" for="mudaid">ID da conta</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="mudanome">
-                            <label class="mdl-textfield__label" for="mudanome">Novo nome da conta</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="number" step="any" min=0 id="mudasaldo">
-                            <label class="mdl-textfield__label" for="mudasaldo">Novo saldo da conta</label>
-                        </div>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:mudarConta();">
-                            Mudar conta
-                        </a>
-                    </div>
-                </div>
-
-                <div class="banco-card mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title mdl-card--expand">
-                        <h2 class="mdl-card__title-text">Saque de Conta</h2>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="saqueid">
-                            <label class="mdl-textfield__label" for="saqueid">ID da conta</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="number" step="any" min=0 id="saquevalor">
-                            <label class="mdl-textfield__label" for="saquevalor">Valor do saque</label>
-                        </div>
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:saqueConta();">
-                            Realizar saque
-                        </a>
-                    </div>
+        <!-- !!! NÃO DELETAR !!! -->
+        <!-- <div class="banco-card mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Saldo de Conta</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="saldoid">
+                    <label class="mdl-textfield__label" for="saldoid">ID da conta</label>
                 </div>
             </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:saldoConta();">
+                    Ver saldo
+                </a>
+            </div>
+        </div> -->
 
-        </main>
-    </div>
-
-
-    <div id="toast-message" class="mdl-js-snackbar mdl-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button class="mdl-snackbar__action" type="button"></button>
-    </div>
-
-    <dialog class="mdl-dialog">
-        <h4 class="mdl-dialog__title" id="dialogtitle">Título</h4>
-        <div class="mdl-dialog__content">
-            <p id="dialogcontent">Conteúdo</p>
+        <!-- !!! NÃO DELETAR !!! -->
+        <div class="banco-card mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Alterar Conta</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="mudaid">
+                    <label class="mdl-textfield__label" for="mudaid">ID da conta</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="mudanome">
+                    <label class="mdl-textfield__label" for="mudanome">Novo nome da conta</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="number" step="any" min=0 id="mudasaldo">
+                    <label class="mdl-textfield__label" for="mudasaldo">Novo saldo da conta</label>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:mudarConta();">
+                    Mudar conta
+                </a>
+            </div>
         </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button close">OK</button>
+
+        <div class="banco-card mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Saque na Conta</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="saqueid">
+                    <label class="mdl-textfield__label" for="saqueid">ID da conta</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="number" step="any" min=0 id="saquevalor">
+                    <label class="mdl-textfield__label" for="saquevalor">Valor do saque</label>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="javascript:saqueConta();">
+                    Realizar saque
+                </a>
+            </div>
         </div>
-    </dialog>
-
-    <script type="application/javascript">
-        window.onload = function () {
-            materializeControls();
-        }
-        function materializeControls() {
-            materializeTextInputs();
-            // materializeSelects();
-            // materializeRadioButtons();
-            // materializeCheckboxes();
-            // materializeTables();
-            // materializeLists();
-            materializeButtons();
-        }
-
-        function materializeTextInputs() {
-            var label, parentEl;
-            document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(function (control) {
-                parentEl = control.parentElement;
-                control.classList.add('mdl-textfield__input');
-                if (parentEl.tagName !== 'DIV') {
-                    return;
-                }
-                parentEl.classList.add('mdl-textfield', 'mdl-js-textfield');
-                label = parentEl.querySelector('label');
-                if (label) {
-                    label.setAttribute('for', control.id || control.name)
-                    label.classList.add('mdl-textfield__label');
-                }
-            });
-        }
-
-        function materializeSelects() {
-            var label, parentEl;
-            document.querySelectorAll('select').forEach(function (control) {
-                parentEl = control.parentElement;
-                control.classList.add('mdl-selectfield__select');
-                if (parentEl.tagName !== 'DIV') {
-                    return;
-                }
-                parentEl.classList.add('mdl-selectfield', 'mdl-js-selectfield');
-                label = parentEl.querySelector('label');
-                if (label) {
-                    label.setAttribute('for', control.id || control.name)
-                    label.classList.add('mdl-selectfield__label');
-                }
-            });
-        }
-
-        function materializeRadioButtons() {
-            var parentEl;
-            document.querySelectorAll('input[type="radio"]').forEach(function (control) {
-                parentEl = control.parentElement;
-                control.classList.add('mdl-radio__button');
-                if (parentEl.tagName == "LABEL") {
-                    parentEl.setAttribute('for', control.id || control.name)
-                    parentEl.classList.add('mdl-radio', 'mdl-js-radio', 'mdl-js-ripple-effect');
-                }
-            });
-        }
-
-        function materializeCheckboxes() {
-            var parentEl;
-            document.querySelectorAll('input[type="checkbox"]').forEach(function (control) {
-                parentEl = control.parentElement;
-                control.classList.add('mdl-checkbox__input');
-                if (parentEl.tagName == "LABEL") {
-                    parentEl.setAttribute('for', control.id || control.name)
-                    parentEl.classList.add('mdl-checkbox', 'mdl-js-checkbox', 'mdl-js-ripple-effect');
-                }
-            });
-        }
-
-        function materializeButtons() {
-            document.querySelectorAll('button').forEach(function (control) {
-                control.classList.add('mdl-button', 'mdl-js-button', 'mdl-button--raised', 'mdl-js-ripple-effect', 'mdl-button--colored');
-            });
-        }
-
-        function materializeTables() {
-            document.querySelectorAll('table').forEach(function (table) {
-                table.classList.add('mdl-data-table', 'mdl-js-data-table');
-                table.querySelectorAll('th,td').forEach(function (cell) {
-                    cell.classList.add('mdl-data-table__cell--non-numeric');
-                });
-            });
-        }
-
-        function materializeLists() {
-            document.querySelectorAll('ul').forEach(function (ulEl) {
-                ulEl.classList.add('mdl-list');
-                ulEl.querySelectorAll('li').forEach(function (liEl) {
-                    liEl.classList.add('mdl-list__item');
-                    liEl.innerHTML = "<span class='mdl-list__item-primary-content'>" +
-                        "<i class='material-icons mdl-list__item-icon'>home</i>" +
-                        liEl.innerText + "</span>";
-                });
-            });
-        }
-    </script>
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script>
-        var dialog = document.querySelector('dialog');
-        if (!dialog.showModal) {
-            dialogPolyfill.registerDialog(dialog);
-        }
-
-        dialog.querySelector('.close').addEventListener('click', function () {
-            dialog.close();
-        });
-
-        var snackbarContainer = document.querySelector('#toast-message');
-
-        function atualizaContas() {
-            $.get($("#requrl").val() + 'conta/', function (data) {
-                var tabela = '';
-
-                for (var i = 0; i < data.length; i++) {
-                    tabela += '<tr><td>' + data[i].id + '</td><td>' + data[i].nome + '</td><td>' + data[i].saldo + '</td></tr>';
-                }
-
-                $("#tabcontas").html(tabela);
-                $grid.masonry();
-
-                snackbarContainer.MaterialSnackbar.showSnackbar({ message: "Lista de contas atualizada." });
-
-            });
-        }
-
-        function atualizaEstoque() {
-            $.get($("#requrl").val() + 'caixa/', function (data) {
-                $("#ced1").text(data["1"]);
-                $("#ced2").text(data["2"]);
-                $("#ced5").text(data["5"]);
-                $("#ced10").text(data["10"]);
-                $("#ced20").text(data["20"]);
-                $("#ced50").text(data["50"]);
-                $("#ced100").text(data["100"]);
-
-                snackbarContainer.MaterialSnackbar.showSnackbar({ message: "Estoque do caixa eletrônico atualizado." });
-
-            });
-        }
-
-        function novaConta() {
-            $.post($("#requrl").val() + 'conta/', {
-                "nome": $("#novanome").val(),
-                "saldo": $("#novasaldo").val()
-            }, function (data) {
-                mostraModal('Nova conta', 'Nova conta #' + data.id + ' de ' + data.nome + ' com P$ ' + data.saldo);
-            });
-        }
-
-        function saldoConta() {
-            $.get($("#requrl").val() + 'conta/' + $("#saldoid").val() + '/', function (data) {
-                mostraModal('Saldo', 'Conta de ' + data.nome + ' com P$ ' + data.saldo);
-            });
-        }
-
-        function mudarConta() {
-            $.post($("#requrl").val() + 'conta/' + $("#mudaid").val() + '/', {
-                "nome": $("#mudanome").val(),
-                "saldo": $("#mudasaldo").val()
-            }, function (data) {
-                mostraModal('Conta modificada', 'Conta de ' + data.nome + ' com P$ ' + data.saldo);
-            });
-        }
-
-        function saqueConta() {
-            $.post($("#requrl").val() + 'conta/' + $("#saqueid").val() + '/saque/', {
-                "valor": $("#saquevalor").val(),
-            }, function (data) {
-                mostraModal('Saque realizado', '<ul><li>' + data["1"] + ' notas de P$ 1</li><li>' + data["2"] + ' notas de P$ 2</li><li>' + data["5"] + ' notas de P$ 5</li><li>' + data["10"] + ' notas de P$ 10</li><li>' + data["20"] + ' notas de P$ 20</li><li>' + data["50"] + ' notas de P$ 50</li><li>' + data["100"] + ' notas de P$ 100</li></ul>');
-            });
-        }
-
-        function estoqueCaixa() {
-            $.post($("#requrl").val() + 'caixa/', {
-                "1": $("#caixa1").val(),
-                "2": $("#caixa2").val(),
-                "5": $("#caixa5").val(),
-                "10": $("#caixa10").val(),
-                "20": $("#caixa20").val(),
-                "50": $("#caixa50").val(),
-                "100": $("#caixa100").val()
-            }, function (data) {
-                $("#ced1").text(data["1"]);
-                $("#ced2").text(data["2"]);
-                $("#ced5").text(data["5"]);
-                $("#ced10").text(data["10"]);
-                $("#ced20").text(data["20"]);
-                $("#ced50").text(data["50"]);
-                $("#ced100").text(data["100"]);
-
-                snackbarContainer.MaterialSnackbar.showSnackbar({ message: "Estoque do caixa eletrônico atualizado." });
-
-            });
-        }
-
-        function mostraModal(titulo, conteudo) {
-            $("#dialogtitle").text(titulo);
-            $("#dialogcontent").html(conteudo);
-            dialog.showModal();
-        }
-
-        var $grid = $('.grid').masonry({
-            itemSelector: '.banco-card',
-            columnWidth: 100
-        });
-    </script> -->
-</body>
-
-</html>
+    </div>
+</main>
+{% endblock %}
