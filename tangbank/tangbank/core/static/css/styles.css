@@ -17,16 +17,17 @@ html,body {
 }
 
 .banco-card-wide1 {
-    width: 380px;
+    width: 500px;
 }
 
 .banco-card-wide2 {
-    width: 500px;
+    width: 700px;
     align-items: center;
 }
 
 form {
     padding: 20px;
+    align-items: center;
 }
 
 .left-side {
