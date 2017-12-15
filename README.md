@@ -15,9 +15,12 @@ This is just a challenge/test made by an enterprise. As I write it (December 201
 
 `cd path/to/cloned/folder/`
 
-- Execute the virtual environment's activation. After that, the virtual environment's name will appear on parentheses before the user on the terminal...
+- Execute the virtual environment's activation. After that, the virtual environment's name will appear on parentheses before the user on the terminal. Then, we can run the project...
 
-`. bin/activate`
+```
+. bin/activate
+tangbank/manage.py runserver
+```
 
 - To deactivate the virtual environment, execute:
 
